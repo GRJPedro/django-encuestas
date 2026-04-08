@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block header_title %}
+    <h1>Bienvenido de Vuelta</h1>
+    <a href="{% url 'encuestas:inicio' %}" class="btn-inicio">← Volver al inicio</a>
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-centrado">
+    <div class="tarjeta-formulario">
+        
+        <h2>Inicia Sesión</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="campo-formulario">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" class="btn-guardar">
+                Entrar
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

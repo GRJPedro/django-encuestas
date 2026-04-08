@@ -1,0 +1,19 @@
+# Secretos
+.env
+
+# Python (archivos temporales)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno virtual
+entorno/
+venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+
+# Base de datos local (por si llegas a usar sqlite de prueba)
+*.sqlite3

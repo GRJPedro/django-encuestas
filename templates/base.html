@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portal Principal - Encuestas{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+
+    <nav class="barra-nav">
+        {% if user.is_authenticated %}
+            <span>Hola, <strong>{{ user.username }}</strong></span>
+            <a href="{% url 'encuestas:logout' %}" class="link-logout">Cerrar Sesión</a>
+        {% else %}
+            <a href="{% url 'encuestas:login' %}" class="link-login">Iniciar Sesión</a>
+            <a href="{% url 'encuestas:registro' %}" class="link-registro">Registrarse</a>
+        {% endif %}
+    </nav>
+
+    <header>
+        {% block header_title %}
+            <h1>Bienvenido al Sistema de Encuestas</h1>
+        {% endblock %}
+    </header>
+
+    <main class="contenido-principal">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

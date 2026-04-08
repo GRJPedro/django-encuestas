@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Usuario{% endblock %}
+
+{% block header_title %}
+    <h1>Crear Cuenta</h1>
+    <a href="{% url 'encuestas:inicio' %}" class="btn-inicio">← Volver al inicio</a>
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-centrado">
+    <div class="tarjeta-formulario">
+        
+        <h2>Regístrate en el Sistema</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="campo-formulario">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" class="btn-guardar">
+                Crear mi cuenta
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

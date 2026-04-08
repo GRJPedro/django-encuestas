@@ -1,0 +1,463 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f4f7f6; 
+}
+        
+header {
+    background-color: #2c3e50; 
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+        
+.contenido-principal {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contenedor-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+    padding: 50px 20px;
+    flex-wrap: wrap; 
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-decoration: none; 
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.card h2 {
+    margin: 0;
+    padding: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    background-color: white;
+}
+
+
+.btn-crear {
+    display: inline-block;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-crear:hover {
+    background-color: #2ecc71;
+}
+
+.card-encuesta {
+    background-color: white;
+    border-radius: 12px;
+    width: 300px;
+    min-height: 150px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 5px solid #3498db; 
+}
+
+.card-encuesta:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+.card-encuesta h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.4em;
+    color: #2c3e50;
+}
+
+.badge-votar {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+        
+.mensaje-vacio {
+    text-align: center;
+    font-size: 1.2em;
+    color: #7f8c8d;
+    width: 100%;
+}
+
+.btn-inicio {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1.1em;
+    border: 1px solid #ecf0f1;
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-inicio:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.contenedor-principal {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.tarjeta-detalle {
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.mensaje-error {
+    color: #e74c3c;
+    background-color: #fadbd8;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.opcion-label {
+    display: block;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+}
+
+.opcion-label:hover {
+    border-color: #3498db;
+    background-color: #ebf5fb;
+}
+
+input[type="radio"] {
+    margin-right: 15px;
+    transform: scale(1.2);
+    accent-color: #3498db; 
+}
+
+.btn-votar {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-votar:hover {
+    background-color: #2980b9;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background-color: #e9ecef;
+    margin: 40px 0;
+}
+
+.resultados-titulo {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.lista-resultados {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-resultados li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdfefe;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1em;
+}
+
+.lista-resultados li:last-child {
+    border-bottom: none;
+}
+
+.badge-votos {
+    background-color: #2ecc71;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* --- ESTILOS PARA CREAR ENCUESTA --- */
+.contenedor-centrado {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.tarjeta-formulario {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.tarjeta-formulario h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.campo-formulario {
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+.separador {
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+    margin: 20px 0;
+}
+
+.titulo-opciones {
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.input-opcion {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-guardar {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-guardar:hover {
+    background-color: #2ecc71;
+}
+
+.contenedor-cancelar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-cancelar {
+    color: #7f8c8d;
+    text-decoration: none;
+}
+
+.link-cancelar:hover {
+    color: #34495e;
+    text-decoration: underline;
+}
+
+
+
+/* --- ESTILOS PARA MAPA --- */
+.contenedor-mapa-relativo {
+    position: relative; 
+    width: 100%;
+    height: calc(100vh - 220px); 
+    min-height: 500px;
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 3px solid #3498db;
+    margin-top: 10px;
+}
+
+#mi_mapa { 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+}
+
+.panel-control {
+    position: absolute;
+    top: 20px;
+    left: 50px; 
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+}
+
+.panel-control input[type="file"] {
+    margin-top: 10px;
+    width: 100%;
+}
+ 
+/* --- ESTILOS DE LOS BOTONES DE MAPA BASE --- */
+.botones-mapa-base {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.btn-base {
+    flex: 1;
+    padding: 8px 5px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    color: #2c3e50;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-base:hover {
+    background-color: #bdc3c7;
+}
+
+/* El estilo que se activa cuando el botón está seleccionado */
+.btn-base.activo {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+    font-weight: bold;
+}
+
+
+
+
+
+/* --- BARRA DE NAVEGACIÓN SUPERIOR --- */
+.barra-nav {
+    background-color: #1a252f;
+    padding: 10px 20px;
+    text-align: right;
+    color: #ecf0f1;
+    font-size: 0.9em;
+}
+
+.barra-nav a {
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.link-login { color: #3498db; }
+.link-login:hover { color: #2980b9; }
+
+.link-registro { color: #2ecc71; }
+.link-registro:hover { color: #27ae60; }
+
+.link-logout { color: #e74c3c; }
+.link-logout:hover { color: #c0392b; }
+
+
+
+/* --- BOTÓN DE EDITAR --- */
+.btn-editar {
+    background-color: #f39c12; 
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.btn-editar:hover {
+    background-color: #d68910;
+}

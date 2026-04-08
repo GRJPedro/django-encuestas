@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Encuesta{% endblock %}
+
+{% block header_title %}
+    <h1>Editar Encuesta</h1>
+    <a href="{% url 'encuestas:inicio' %}" class="btn-inicio">← Cancelar y volver</a>
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-centrado">
+    <div class="tarjeta-formulario">
+        
+        <h2>Modifica tu pregunta</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="campo-formulario">
+                {{ form.as_p }}
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+            
+            <h3>Opciones:</h3>
+            <div id="contenedor-opciones">
+                {% for opcion in opciones %}
+                    <div class="campo-formulario">
+                        <input type="text" name="opciones[]" value="{{ opcion.texto_opcion }}" class="form-control" required>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="btn-guardar" style="margin-top: 20px;">
+                Guardar Cambios
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Votar - {{ pregunta.texto_pregunta }}{% endblock %}
+
+{% block header_title %}
+    <h1>Participa en la Encuesta</h1>
+    <a href="{% url 'encuestas:inicio' %}" class="btn-inicio">← Volver a Encuestas</a>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="contenedor-principal">
+        <div class="tarjeta-detalle">
+            
+            {% if user.is_authenticated %}
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <a href="{% url 'encuestas:editar' pregunta.id %}" class="btn-editar">
+                        ✏️ Editar Encuesta
+                    </a>
+                </div>
+            {% endif %}
+            
+            <form action="{% url 'encuestas:votar' pregunta.id %}" method="post">
+                {% csrf_token %}
+                
+                <fieldset>
+                    <legend>{{ pregunta.texto_pregunta }}</legend>
+                    
+                    {% if error_message %}
+                        <p class="mensaje-error"><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    
+                    {% for opcion in pregunta.opcion_set.all %}
+                        <label class="opcion-label" for="opcion{{ forloop.counter }}">
+                            <input type="radio" name="opcion" id="opcion{{ forloop.counter }}" value="{{ opcion.id }}">
+                            {{ opcion.texto_opcion }}
+                        </label>
+                    {% endfor %}
+                </fieldset>
+                
+                <input type="submit" value="Votar ahora" class="btn-votar">
+            </form>
+
+            <hr>
+
+            <h2 class="resultados-titulo">Resultados actuales:</h2>
+            <ul class="lista-resultados">
+            {% for opcion in pregunta.opcion_set.all %}
+                <li>
+                    <span>{{ opcion.texto_opcion }}</span> 
+                    <span class="badge-votos">{{ opcion.votos }} voto{{ opcion.votos|pluralize:"s" }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+{% endblock %}

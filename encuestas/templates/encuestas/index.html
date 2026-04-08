@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Encuestas Disponibles{% endblock %}
+
+{% block header_title %}
+    <h1>Encuestas Disponibles</h1>
+    <br>
+    <a href="/" class="btn-inicio">← Volver al inicio</a>
+{% endblock %}
+
+{% block content %}
+
+    <div style="text-align: right; margin-bottom: 30px;">
+        <a href="{% url 'encuestas:crear' %}" class="btn-crear">+ Crear Nueva Encuesta</a>
+    </div>
+
+    <div class="contenedor-cards">
+        {% if ultimas_preguntas %}
+            {% for pregunta in ultimas_preguntas %}
+                <a href="{% url 'encuestas:detalle' pregunta.id %}" class="card-encuesta">
+                    <h2>{{ pregunta.texto_pregunta }}</h2>
+                    <span class="badge-votar">Participar</span>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="mensaje-vacio">No hay encuestas disponibles en este momento.</p>
+        {% endif %}
+    </div>
+{% endblock %}

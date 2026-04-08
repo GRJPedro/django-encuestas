@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load static %} {% block title %}Mapa Interactivo{% endblock %}
+
+{% block header_title %}
+    <h1>Visor Geográfico</h1>
+    <a href="/" class="btn-inicio">← Volver al inicio</a>
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <div class="contenedor-mapa-relativo">
+        
+        <div class="panel-control">
+            <label for="input-geojson"><strong>Cargar archivo GeoJSON:</strong></label><br>
+            <input type="file" id="input-geojson" accept=".geojson, .json">
+            
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ccc;">
+            <label><strong>Estilo del Mapa:</strong></label><br>
+            <div class="botones-mapa-base">
+                <button onclick="cambiarMapaBase('streets', this)" class="btn-base activo">Calles</button>
+                <button onclick="cambiarMapaBase('sat', this)" class="btn-base">Satélite</button>
+                <button onclick="cambiarMapaBase('dark', this)" class="btn-base">Oscuro</button>
+            </div>
+        </div>
+
+        <div id="mi_mapa"></div>
+    </div>
+
+    <script src="{% static 'js/visor.js' %}"></script>
+    
+{% endblock %}

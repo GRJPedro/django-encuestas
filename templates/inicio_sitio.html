@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Portal Principal - Encuestas{% endblock %}
+
+{% block content %}
+    <div class="contenedor-cards">
+        
+        <a href="/encuestas/" class="card">
+            <img src="{% static 'images/encuestas.jpg' %}" alt="Imagen de encuestas">
+            <h2>Ir a las Encuestas</h2>
+        </a>
+
+        <a href="/mapa/" class="card">
+            <img src="{% static 'images/mapa.jpg' %}" alt="Imagen de mapa">
+            <h2>Ver el Mapa</h2>
+        </a>
+
+    </div>
+{% endblock %}

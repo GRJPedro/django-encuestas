@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Nueva Encuesta{% endblock %}
+
+{% block header_title %}
+    <h1>Diseña tu Encuesta</h1>
+{% endblock %}
+
+{% block content %}
+<div class="contenedor-centrado">
+    <div class="tarjeta-formulario">
+        
+        <h2>Nueva Pregunta</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="campo-formulario">
+                {{ form.as_p }}
+            </div>
+            
+            <hr class="separador">
+            
+            <h3 class="titulo-opciones">Opciones de respuesta:</h3>
+            
+            <div style="margin-bottom: 20px;">
+                <input type="text" name="opciones[]" placeholder="Opción 1" required class="input-opcion">
+                <input type="text" name="opciones[]" placeholder="Opción 2" required class="input-opcion">
+                <input type="text" name="opciones[]" placeholder="Opción 3 (Opcional)" class="input-opcion">
+            </div>
+            
+            <button type="submit" class="btn-guardar">
+                Guardar Encuesta Completa
+            </button>
+        </form>
+
+        <div class="contenedor-cancelar">
+            <a href="{% url 'encuestas:inicio' %}" class="link-cancelar">Cancelar y regresar</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
