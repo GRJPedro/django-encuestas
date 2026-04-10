@@ -117,7 +117,6 @@ def cerrar_sesion(request):
 
 @login_required
 def editar_encuesta(request, pregunta_id):
-    # 1. Buscamos la pregunta o marcamos error 404 si no existe
     pregunta = get_object_or_404(Pregunta, pk=pregunta_id)
     
     if request.method == 'POST':
@@ -128,18 +127,17 @@ def editar_encuesta(request, pregunta_id):
             
             opciones_enviadas = request.POST.getlist('opciones[]')
             
-            # 1. Sacamos las opciones actuales de la DB
+            # Aqui se sacan las opciones actuales de la DB
             opciones_db = pregunta.opcion_set.values_list('texto_opcion', flat=True)
             
-            # 2. Las pasamos a minúsculas, les quitamos espacios y las metemos a un SET
-            # Esto nos servirá como nuestro "filtro" a prueba de fallos
+            # Las pasamos a minúsculas, les quitamos espacios y las metemos a un SET
             opciones_existentes = set([texto.strip().lower() for texto in opciones_db])
             
             for texto in opciones_enviadas:
                 texto_limpio = texto.strip()
-                texto_comparar = texto_limpio.lower() # Usamos esta variable SOLO para comparar
+                texto_comparar = texto_limpio.lower() 
                 
-                # 3. Si tiene texto y NO está en nuestro filtro de opciones existentes...
+                # Si tiene texto y NO está en nuestro filtro de opciones existentes...
                 if texto_limpio and texto_comparar not in opciones_existentes:
                     
                     # Lo creamos usando el texto_limpio original (para respetar si el usuario usó mayúsculas)
@@ -147,13 +145,12 @@ def editar_encuesta(request, pregunta_id):
                         pregunta=pregunta_editada, 
                         texto_opcion=texto_limpio
                     )
-                    # 4. CRUCIAL: Lo agregamos al filtro para que si el formulario mandó otro "si", lo ignore
                     opciones_existentes.add(texto_comparar)
             
             return redirect('encuestas:inicio')
             
     else:
-        # 4. Si es GET, cargamos el formulario lleno con los datos actuales
+        # Si es GET, cargamos el formulario lleno con los datos actuales
         form = PreguntaForm(instance=pregunta)
 
     # Obtenemos las opciones actuales para mandarlas al template
@@ -175,7 +172,6 @@ def eliminar_opcion(request, opcion_id):
     # Guardamos el ID de la pregunta para saber a dónde regresar
     pregunta_id = opcion.pregunta.id
     
-    # ¡Pum! Eliminada
     opcion.delete()
     
     # Redirigimos de vuelta a la página de edición de esa misma pregunta
