@@ -25,25 +25,59 @@
             <h3>Opciones:</h3>
             <div id="contenedor-opciones">
                 {% for opcion in opciones %}
-                    <div class="campo-formulario" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <div class="campo-formulario fila-opcion" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                         
-                        <input type="text" name="opciones[]" value="{{ opcion.texto_opcion }}" class="form-control" required style="flex-grow: 1;">
+                        <input type="text" name="opcion_{{ opcion.id }}" value="{{ opcion.texto_opcion }}" class="form-control" required style="flex-grow: 1;">
                         
-                        <a href="{% url 'encuestas:eliminar_opcion' opcion.id %}" 
-                           style="color: white; background-color: #dc3545; padding: 5px 10px; text-decoration: none; border-radius: 5px; font-size: 0.9em;"
-                           onclick="return confirm('¿Estás seguro de eliminar esta opción? Se perderán los votos asociados a ella.');">
+                        <button type="button" 
+                           style="color: white; background-color: #dc3545; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;"
+                           onclick="eliminarFila(this)">
                            Borrar
-                        </a>
+                        </button>
 
                     </div>
                 {% endfor %}
             </div>
             
-            <button type="submit" class="btn-guardar" style="margin-top: 20px;">
-                Guardar Cambios
+            <div style="margin-top: 10px; margin-bottom: 20px;">
+                <button type="button" onclick="agregarNuevaOpcion()" style="background-color: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9em;">
+                    + Añadir otra opción
+                </button>
+            </div>
+            
+            <button type="submit" class="btn-guardar" style="width: 100%; padding: 10px; font-size: 1.1em;">
+                Guardar Todos los Cambios
             </button>
         </form>
 
     </div>
 </div>
+
+<script>
+    // Función para desaparecer la opción de la pantalla
+    function eliminarFila(boton) {
+        if(confirm('¿Estás seguro de quitar esta opción? Se borrará al guardar los cambios.')) {
+            // Encuentra el div padre (la fila completa) y lo elimina del HTML
+            boton.closest('.fila-opcion').remove();
+        }
+    }
+
+    // Función para inyectar un input nuevo
+    function agregarNuevaOpcion() {
+        const contenedor = document.getElementById('contenedor-opciones');
+        const nuevaFila = document.createElement('div');
+        nuevaFila.className = 'campo-formulario fila-opcion';
+        nuevaFila.style = 'display: flex; align-items: center; gap: 10px; margin-bottom: 10px;';
+        
+        // Fíjate que el name de las nuevas es 'nuevas_opciones[]', justo como lo espera la vista en Python
+        nuevaFila.innerHTML = `
+            <input type="text" name="nuevas_opciones[]" placeholder="Escribe la nueva opción" class="form-control" required style="flex-grow: 1;">
+            <button type="button" style="color: white; background-color: #dc3545; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em;" onclick="eliminarFila(this)">
+                Quitar
+            </button>
+        `;
+        
+        contenedor.appendChild(nuevaFila);
+    }
+</script>
 {% endblock %}

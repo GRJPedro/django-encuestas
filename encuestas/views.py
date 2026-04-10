@@ -125,27 +125,36 @@ def editar_encuesta(request, pregunta_id):
         if form.is_valid():
             pregunta_editada = form.save()
             
-            opciones_enviadas = request.POST.getlist('opciones[]')
-            
-            # Aqui se sacan las opciones actuales de la DB
-            opciones_db = pregunta.opcion_set.values_list('texto_opcion', flat=True)
-            
-            # Las pasamos a minúsculas, les quitamos espacios y las metemos a un SET
-            opciones_existentes = set([texto.strip().lower() for texto in opciones_db])
-            
-            for texto in opciones_enviadas:
-                texto_limpio = texto.strip()
-                texto_comparar = texto_limpio.lower() 
+            # --- 1. ACTUALIZAR OPCIONES EXISTENTES (Y conservar votos) ---
+            # Recorremos las opciones que ya existen en la base de datos para esta pregunta
+            for opcion in pregunta.opcion_set.all():
+                # Buscamos en el formulario el input que tenga el ID de esta opción (ej. "opcion_15")
+                nombre_input = f'opcion_{opcion.id}'
                 
-                # Si tiene texto y NO está en nuestro filtro de opciones existentes...
-                if texto_limpio and texto_comparar not in opciones_existentes:
+                if nombre_input in request.POST:
+                    # Si el input viene en el POST, sacamos su texto
+                    texto_actualizado = request.POST.get(nombre_input, '').strip()
                     
-                    # Lo creamos usando el texto_limpio original (para respetar si el usuario usó mayúsculas)
+                    # Si el texto cambió y no está vacío, actualizamos la base de datos
+                    if texto_actualizado and texto_actualizado != opcion.texto_opcion:
+                        opcion.texto_opcion = texto_actualizado
+                        opcion.save() # Los votos no se tocan, se quedan intactos
+                else:
+                    # Si el input NO viene en el POST, significa que el usuario 
+                    # borró esa opción en el HTML con algún botón de "Eliminar".
+                    opcion.delete() 
+
+            # --- 2. AGREGAR OPCIONES NUEVAS ---
+            # Las opciones nuevas no tienen ID aún, las recibimos en un arreglo diferente
+            nuevas_opciones = request.POST.getlist('nuevas_opciones[]')
+            
+            for texto in nuevas_opciones:
+                texto_limpio = texto.strip()
+                if texto_limpio:
                     Opcion.objects.create(
                         pregunta=pregunta_editada, 
                         texto_opcion=texto_limpio
                     )
-                    opciones_existentes.add(texto_comparar)
             
             return redirect('encuestas:inicio')
             
@@ -171,7 +180,7 @@ def eliminar_opcion(request, opcion_id):
     
     # Guardamos el ID de la pregunta para saber a dónde regresar
     pregunta_id = opcion.pregunta.id
-    
+
     opcion.delete()
     
     # Redirigimos de vuelta a la página de edición de esa misma pregunta
