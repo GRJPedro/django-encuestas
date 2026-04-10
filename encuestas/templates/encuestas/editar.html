@@ -25,8 +25,16 @@
             <h3>Opciones:</h3>
             <div id="contenedor-opciones">
                 {% for opcion in opciones %}
-                    <div class="campo-formulario">
-                        <input type="text" name="opciones[]" value="{{ opcion.texto_opcion }}" class="form-control" required>
+                    <div class="campo-formulario" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        
+                        <input type="text" name="opciones[]" value="{{ opcion.texto_opcion }}" class="form-control" required style="flex-grow: 1;">
+                        
+                        <a href="{% url 'encuestas:eliminar_opcion' opcion.id %}" 
+                           style="color: white; background-color: #dc3545; padding: 5px 10px; text-decoration: none; border-radius: 5px; font-size: 0.9em;"
+                           onclick="return confirm('¿Estás seguro de eliminar esta opción? Se perderán los votos asociados a ella.');">
+                           Borrar
+                        </a>
+
                     </div>
                 {% endfor %}
             </div>
